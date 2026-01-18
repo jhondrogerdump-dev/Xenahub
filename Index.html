@@ -1,221 +1,175 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Hub - DNS Script Panel</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background: black;
-            background-image: radial-gradient(circle, #333 1px, transparent 1px);
-            background-size: 20px 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Arial', sans-serif;
-            color: white;
-            overflow: hidden;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xena Hub | Roblox Script Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --yellow: #ffd600;
+      --yellow-glow: rgba(255, 214, 0, 0.45);
+      --dark: #0b0b0b;
+      --card: #141414;
+    }* {
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
 
-        .container {
-            text-align: center;
-        }
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #1a1a1a, #000);
+  color: white;
+}
 
-        /* Welcome Screen */
-        #welcome-screen {
-            display: block;
-        }
+header {
+  padding: 80px 20px 60px;
+  text-align: center;
+}
 
-        #panel-screen {
-            display: none;
-        }
+header h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--yellow);
+  text-shadow: 0 0 25px var(--yellow-glow);
+}
 
-        .logo {
-            width: 200px;
-            height: 200px;
-            margin-bottom: 40px;
-            border-radius: 20px;
-            box-shadow: 0 0 30px rgba(0, 191, 255, 0.8);
-        }
+header p {
+  color: #cfcfcf;
+  max-width: 600px;
+  margin: 20px auto 0;
+  line-height: 1.6;
+}
 
-        h1 {
-            font-size: 60px;
-            margin-bottom: 50px;
-            text-shadow: 0 0 20px rgba(0, 191, 255, 0.8);
-            letter-spacing: 10px;
-        }
+.buttons {
+  margin-top: 35px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
-        .btn-group {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-        }
+.btn {
+  padding: 14px 32px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
 
-        button {
-            padding: 15px 40px;
-            font-size: 20px;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
+.btn.primary {
+  background: var(--yellow);
+  color: black;
+  box-shadow: 0 0 25px var(--yellow-glow);
+}
 
-        #continue-btn {
-            background: white;
-            color: black;
-            box-shadow: 0 0 20px white;
-        }
+.btn.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 40px var(--yellow-glow);
+}
 
-        #continue-btn:hover {
-            transform: scale(1.1);
-        }
+.btn.secondary {
+  border: 2px solid var(--yellow);
+  color: var(--yellow);
+}
 
-        #discord-btn {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
+.btn.secondary:hover {
+  background: var(--yellow);
+  color: black;
+}
 
-        #discord-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
+section {
+  padding: 70px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
 
-        /* Panel Screen */
-        .panel {
-            width: 350px;
-            background: rgba(50, 50, 0, 0.8);
-            border: 2px solid #ffd700;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
-        }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
 
-        .panel-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
+.card {
+  background: linear-gradient(180deg, #181818, #0f0f0f);
+  border-radius: 18px;
+  padding: 30px;
+  border: 1px solid #222;
+  transition: 0.3s ease;
+}
 
-        .script-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 10px;
-            background: #888; /* Placeholder for script icon */
-        }
+.card:hover {
+  border-color: var(--yellow);
+  box-shadow: 0 0 30px var(--yellow-glow);
+  transform: translateY(-5px);
+}
 
-        .changelog-btn {
-            background: #444;
-            color: white;
-            padding: 8px 15px;
-            font-size: 14px;
-            border-radius: 10px;
-        }
+.card h3 {
+  color: var(--yellow);
+  margin-bottom: 12px;
+}
 
-        .script-title {
-            font-size: 24px;
-            margin: 0;
-        }
+.card p {
+  color: #bdbdbd;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
 
-        .last-updated {
-            font-size: 14px;
-            color: #aaa;
-            margin: 5px 0;
-        }
+.script-box {
+  margin-top: 50px;
+  background: #0d0d0d;
+  border-radius: 16px;
+  border: 1px solid #222;
+  padding: 25px;
+  font-family: monospace;
+  color: var(--yellow);
+  overflow-x: auto;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+}
 
-        .status {
-            color: #0f0;
-            font-size: 14px;
-        }
+footer {
+  padding: 40px 20px;
+  text-align: center;
+  color: #777;
+  border-top: 1px solid #1c1c1c;
+}
 
-        .buy-key-btn {
-            display: block;
-            width: 100%;
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 50px;
-            font-size: 18px;
-        }
+footer span {
+  color: var(--yellow);
+}
 
-        .copy-script-btn {
-            display: block;
-            width: 100%;
-            background: #ffd700;
-            color: black;
-            padding: 15px;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: bold;
-            box-shadow: 0 0 20px #ffd700;
-        }
-
-        .copy-script-btn:hover, .buy-key-btn:hover {
-            transform: scale(1.05);
-        }
-    </style>
+  </style>
 </head>
-<body>
-    <div class="container">
-        <!-- Welcome Screen -->
-        <div id="welcome-screen">
-            <img src="https://via.placeholder.com/200x200/000033/00bfff?text=NOVA+HUB" alt="Nova Hub Logo" class="logo">
-            <h1>WELCOME TO<br>NOVA HUB</h1>
-            <div class="btn-group">
-                <button id="continue-btn">CONTINUE</button>
-                <button id="discord-btn">DISCORD</button>
-            </div>
-        </div>
+<body>  <header>
+    <h1>XENA HUB</h1>
+    <p>A clean, powerful, and keyless Roblox script hub.
+       Designed for exploiters who want speed, stability, and style.</p><div class="buttons">
+  <a href="#script" class="btn primary">Get Script</a>
+  <a href="https://discord.gg/JguCsgRP7k" target="_blank" class="btn secondary">Join Discord</a>
+</div>
 
-        <!-- Panel Screen -->
-        <div id="panel-screen">
-            <div class="panel">
-                <div class="panel-header">
-                    <img src="https://via.placeholder.com/60x60/888888/ffffff?text=SCRIPT" alt="Script Icon" class="script-icon">
-                    <button class="changelog-btn">CHANGELOG</button>
-                </div>
-                <h2 class="script-title">DIESEL N STEEL</h2>
-                <p class="last-updated">Last Updated: Dec 18, 2025</p>
-                <p class="status">● ONLINE</p>
-                <p>✓ 2.1.0 STABLE</p>
-                <button class="buy-key-btn">BUY KEY</button>
-                <button class="copy-script-btn">COPY SCRIPT</button>
-            </div>
-        </div>
-    </div>
+  </header>  <section>
+    <div class="grid">
+      <div class="card">
+        <h3>⚡ Fast Execution</h3>
+        <p>Optimized scripts that run smoothly on most Roblox executors.</p>
+      </div>
+      <div class="card">
+        <h3>🔑 Keyless</h3>
+        <p>No annoying linkvertise or keys. Inject and play instantly.</p>
+      </div>
+      <div class="card">
+        <h3>🛡️ Secure</h3>
+        <p>Regular updates to reduce detection and patch exploits.</p>
+      </div>
+      <div class="card">
+        <h3>🎨 Aesthetic UI</h3>
+        <p>Yellow neon themed interface designed to look clean and modern.</p>
+      </div>
+    </div><div id="script" class="script-box">
 
-    <script>
-        const welcomeScreen = document.getElementById('welcome-screen');
-        const panelScreen = document.getElementById('panel-screen');
-        const continueBtn = document.getElementById('continue-btn');
+<pre>loadstring(game:HttpGet("PUT_YOUR_SCRIPT_LINK_HERE"))()</pre></div>
 
-        continueBtn.addEventListener('click', () => {
-            welcomeScreen.style.display = 'none';
-            panelScreen.style.display = 'block';
-        });
-
-        // Optional: Add functionality for other buttons
-        document.querySelector('.changelog-btn').addEventListener('click', () => {
-            alert('Changelog feature not implemented yet.');
-        });
-
-        document.querySelector('.buy-key-btn').addEventListener('click', () => {
-            alert('Buy Key feature not implemented yet.');
-        });
-
-        document.querySelector('.copy-script-btn').addEventListener('click', () => {
-            navigator.clipboard.writeText('Your script code here...');
-            alert('Script copied to clipboard!');
-        });
-
-        document.getElementById('discord-btn').addEventListener('click', () => {
-            alert('Redirect to Discord not implemented.');
-        });
-    </script>
-</body>
+  </section>  <footer>
+    © 2026 <span>Xena Hub</span> — Not affiliated with Roblox Corporation.
+  </footer></body>
 </html>
